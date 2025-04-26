@@ -13,7 +13,7 @@ app.listen(PORT, () => console.log(`Servidor escuchando en ${PORT}`));
 
 // conexxión
 mongoose.connect(process.env.MONGODB_URI)
-.then(() => console.log("✅Conectado"))
+.then(() => console.log("✅Conectado a la DB"))
 .catch(err => console.error("❌Error: ", err.message));
 
 // entidad Usuario
@@ -64,14 +64,11 @@ app.post("/api/register", async (req, res) =>{
 app.get("/api/users/:email", async (req, res) => {
     try{
         const emailUsuario = req.params.email;
-        if(!emailUsuario){
-            return res.status(400).json({error: "Se requiere correo para consultar usuario"});
-        }
-        const usuario = await Usuario.findOne({email: userMail});
+        const usuario = await Usuario.findOne({email: emailUsuario});
         if(!usuario){
             return res.status(404).json({error: "No existe usuario con el correo introducido"});
         }
-
+        res.json(usuario)
     }catch(error){
         console.error("Error en consulta:",error);
         res.status(500).json({error:"Error al buscar usuario"})
