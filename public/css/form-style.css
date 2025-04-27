@@ -1,0 +1,66 @@
+        .form-container{
+            display: grid;
+          grid-template-columns: auto auto;
+          align-items: center;
+
+          margin: 1%;
+          border: 10px none #cf1111;
+          padding: 0.5%;
+        }
+
+        .form-wrapper{
+          padding: 2%;
+          margin: 10px;
+          border: 10px none #000000;
+          padding: 10px;
+          min-width : 330px;
+        }
+
+        .logo-container{
+          border: 10px none #2f00ff;
+          display: grid;
+          grid-template-columns: auto auto auto;
+          align-content: auto;
+          min-height: 100px;
+
+        }
+
+        .middle-column{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .logo-wrapper{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            margin: 10px;
+            border: 10px none #00ff15;
+            padding: 1px;
+            
+            
+        }
+        
+        .logo-wrapper img{
+            min-width: 100%;
+            min-height: 100%;
+        }
+        
+        .passwordDisplay{
+            display: grid; 
+            grid-template-columns: 60% 40%;
+            border: 10px none black;
+            align-items: center;
+        }
+        #displayPswButton{
+            
+            width: 175px;
+          border: 5px none black;
+          align-items: center;
+          transform: translateY(25%);
+          cursor: pointer;
+
+        }
+        
+

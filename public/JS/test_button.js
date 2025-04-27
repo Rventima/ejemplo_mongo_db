@@ -1,12 +1,12 @@
 
-import { displayNewToast } from "../components/toast/toast.js";
+import { displayNewToast } from "/components/toast.js";
 
 const testButton = document.getElementById("testButton");
 testButton.addEventListener("click",() => fetchUserByEmail("q@qwqeqqw"));
 
 async function fetchUserByEmail(email) {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);//5000ms para esperar respuesta
+    const timeoutId = setTimeout(() => controller.abort(), 10000);//5000ms para esperar respuesta
 
     try{
         const response = await fetch(`http://localhost:3000/api/users/${encodeURIComponent(email)}`,{

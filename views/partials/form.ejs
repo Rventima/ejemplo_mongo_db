@@ -1,0 +1,88 @@
+     <div class="position-relative">
+        <div class="position-absolute top-0 start-50 translate-middle">
+          <button type="button" class="btn btn-primary" id="testButton">Test Button</button>
+        </div>
+      </div>
+  
+  
+      <div 
+        class="toast-container p-1" 
+        id="toastAlertContainer" 
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          justify-items: center;
+          border : 5px none black;
+  
+        ">
+      </div>
+      
+      <div id="miToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="/imgs/logo.png" class="rounded me-2" alt="Hola">
+            <strong class="me-auto" id="toastTitle">Notificación</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Descripción
+          </div>
+      </div>
+  
+  
+      <div id="alertToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="/imgs/logo.png" class="rounded me-2" alt="Hola">
+          <strong class="me-auto" id="toastTitle">Título</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+  
+      <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
+  
+      
+      <div class="form-container">
+        <div class="form-wrapper">
+          <form id="formulario-bienvenida">
+            <div class="mb-3">
+              <label for="inputMail" class="form-label">Correo electrónico</label>
+              <input type="email" class="form-control" id="inputMail" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">De preferencia introduce tu correo institucional.</div>
+            </div>
+            <div class="mb-3">       
+              <label for="inputPassword" class="form-label">Contraseña </label>
+              <div id="passwordFieldContainer" class=" passwordDisplay">
+                
+                <input type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp">
+                <p class="form-text control" id="displayPswButton" toggle="false">🙈 Mostrar contraseña</p>
+              </div>
+              <div id="passwordHelp" class="form-text">Mínimo 8 caracteres y un número.</div>
+  
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="esEstudianteUAM" name="esEstudianteUAM">
+              <label class="form-check-label" for="esEstudianteUAM">Soy estudiante de la UAM.</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </form>
+          
+        </div>
+    
+        <div class="logo-container">
+          <div class="left-column" style="display: flex; align-items: center; justify-content: center;">          
+            <h1>
+              Ingresa tus datos
+            </h1>
+          </div>
+          <div class="middle-column">
+            <div class="logo-wrapper">
+              <img src="imgs/logo-large.png">
+            </div>  
+          </div>
+          <div class="right-column" style="min-width: 100px;"></div>
+        </div>
+      </div>
+        
+      <script src="/JS/test_button.js" type="module"></script>
+      <script src = "/components/toast.js" type="module"></script>
+      <script src = "/JS/formulario.js"></script>
