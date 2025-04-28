@@ -14,8 +14,9 @@ app.use(cors({origin: [process.env.ALLOWED_ORIGINS]}));
 app.use(helmet({  
     contentSecurityPolicy: {
         directives: {
-        "script-src": ["'self'", "https://cdn.jsdelivr.net"],
-        "script-src-elem": ["'self'", "https://cdn.jsdelivr.net"],
+            "default-src": ["'self'"],
+            "connect-src": ["'self'", "http://localhost:3000"],
+            "script-src": ["'self'", "https://cdn.jsdelivr.net"],
         },
     },      
 }));
@@ -34,7 +35,10 @@ const PORT = process.env.PORT || 3000; //PORT si se encuentra, de lo contrario: 
 app.listen(PORT, () => console.log(`Servidor escuchando en ${PORT}`));
 
 // conexxión
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_URI,{
+    maxPoolSize: 1, 
+    serverSelectionTimeoutMS: 5000
+})
 .then(() => console.log("✅Conectado a la DB"))
 .catch(err => console.error("❌Error: ", err.message));
 
