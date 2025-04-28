@@ -4,10 +4,31 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: [process.env.ALLOWED_ORIGINS]}));
+
+app.use(helmet({  
+    contentSecurityPolicy: {
+        directives: {
+        "script-src": ["'self'", "https://cdn.jsdelivr.net"],
+        "script-src-elem": ["'self'", "https://cdn.jsdelivr.net"],
+        },
+    },      
+}));
+
+app.use(express.json({limit: "10kb"}));
+app.use(express.urlencoded({ extended: true, limit: "10kb"}));
+
+const limiter = rateLimit({
+    windowMs: 15 * ( 60 * 1000), // minutos * (milisegundos en un minuto)
+    max: 100
+});
+
+app.use("/api/",limiter);
 
 const PORT = process.env.PORT || 3000; //PORT si se encuentra, de lo contrario: 3000
 app.listen(PORT, () => console.log(`Servidor escuchando en ${PORT}`));
