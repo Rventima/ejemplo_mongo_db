@@ -1,3 +1,4 @@
+const User = require("../models/User.js");
 const Usuario = require("../models/User.js");
 const bcrypt = require("bcryptjs");
 
@@ -50,5 +51,45 @@ exports.getUser = async (req, res) =>{
     }catch(error){
         console.error("Error en consulta:",error);
         res.status(500).json({error:"Error al buscar usuario"})
+    }
+};
+
+exports.updateUser = async (req, res) =>{
+    try{
+        const {email} = req.params;
+        const updateData = req.body;
+
+        if (updateData.email){
+            const userExists = await User.findOne({
+                email: updateData.email,
+                _id: {$ne: req.user._id} // $ne selects everything except the objects with this value
+            });
+            if(userExists){
+                return res.status(409).json({ error: "El correo ya pertenece a una cuenta" });
+            }
+        }
+
+        if(!email){
+            return res.status(400).json({error : "Email requerido para update"});
+        }
+        const updateUser = await User.findOneAndUpdate(
+            {email},
+            updateData,
+            {new: true, runValidators: true}
+        ).select("-password -__v");
+
+        if(!updateUser){
+            return res.status(404).json({error: "Email no encontrado"});
+        }
+
+        res.status(200).json({
+            message: "Usuario actualizado",
+            user: {
+                email: updatedUser.mail,
+                esEstudianteUAM: updateUser.esEstudianteUAM
+            }
+        });
+    }catch(error){
+        res.status(500).json({error: "Error interno del servidor"});
     }
 };
